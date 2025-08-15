@@ -26,10 +26,11 @@ class LikeTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_list_post_like(self):
+        new_question = Question.objects.create(
+            title='Another Question', content='Content', author=self.user, category='frontend')
         url = reverse('like-list')
         data = {
-            'user': self.user.id,
-            'question': self.question.id
+            'question': new_question.id
         }
 
         response = self.client.post(url, data, format="json")

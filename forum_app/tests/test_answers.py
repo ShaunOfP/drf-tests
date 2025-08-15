@@ -20,16 +20,16 @@ class AnswerTests(APITestCase):
         self.client = APIClient()
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
 
-    # def test_list_post_answer(self):
-    #     url = reverse('answer-list-create')
-    #     data = {
-    #         'content': 'Content1',
-    #         'author': self.user.id,
-    #         'question': self.question.id
-    #     }
+    def test_list_post_answer(self):
+        url = reverse('answer-list-create')
+        data = {
+            'content': 'Content1',
+            'author': self.user.id,
+            'question': self.question.id
+        }
 
-    #     response = self.client.post(url, data, format="json")
-    #     self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_detail_answer(self):
         url = reverse('answer-detail', kwargs={'pk': self.answer.id})
